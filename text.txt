@@ -1,0 +1,72 @@
+pi 0 checks billings
+update to the cloud server mysql server
+pushBillings.sh{
+
+
+
+
+:)
+get_fld_piSerialKey.sh{
+cat /proc/cpuinfo | grep Serial | cut -d ' ' -f 2
+}
+
+//first a script to day count and update mysql local, then get_fld_daysRunning.sh to push it up to the cloud
+
+get_fld_daysRunning.sh{
+sudo mysql -e"select 1;";
+}
+var_fld_piSerialKey=$(get_fld_piSerialKey.sh)
+var_fld_daysRunning=$(get_fld_daysRunning.sh)
+var_fld_daysPayedFor=$(get_fld_daysPayedFor.sh)
+var_fld_powerSwitch=$(get_fld_powerSwitch.sh)
+
+mysql -upi -praspberry -h 52.87.6.201 -e"use dtb_piBillings; insert into tbl_piBillings(fld_piSerialKey,fld_daysRunning,fld_powerSwitch,fld_daysPayedFor) values ('"+$var_fld_piSerialKey+"',"+var_fld_daysRunning+","+$var_fld_daysPayedFor+","+$var_fld_powerSwitch+");select 1;";
+
+}
+
+
+pi3 sends movies watched
+update to the cloud server mysql server
+pushMoviesWatched.sh
+
+
+
+
+
+ssh -i Downloads/hotelbookings.pem ubuntu@52.87.6.201
+
+
+mysql -uroot -proot -e"select 1;";
+
+mysql -upi -praspberry -h   \
+    -D dtb_piBillings
+
+mysql -upi -praspberry -h 52.87.6.201 -e"select 1;";
+ssh osmc@192.168.9.106
+mysql -upi -praspberry -h 192.168.9.106 -e"select 1;";
+
+mysql -upi -praspberry -h 52.87.6.201 -e"use dtb_piBillings;select * from tbl_piBillings;";
+tbl_moviesWatchedint NOT NULL AUTO_INCREMENT
+
+create table tbl_moviesWatched(
+ fld_id int NOT NULL AUTO_INCREMENT primary key,
+ fld_fileName varchar(30),
+ fld_timesWatched int,
+ fld_piSerialKey varchar(30)
+ );
+
+ocms.sh{
+send the movie count and ur serial number up
+
+var_fld_piSerialKey=$(get_fld_piSerialKey.sh)
+var_fld_fileName=$(get_fld_daysRunning.sh)
+var_fld_timesWatched=$(get_fld_daysPayedFor.sh)
+
+mysql -upi -praspberry -h 52.87.6.201 -e"use dtb_piBillings; insert into tbl_moviesWatched( fld_fileName, fld_timesWatched, fld_piSerialKey ) values (
+
+
+mysql -upi -praspberry -h 52.87.6.201 -e"use dtb_piBillings; insert into tbl_piBillings(fld_piSerialKey,fld_daysRunning,fld_powerSwitch,fld_daysPayedFor) values ("Lorant",61,12,1);select 1;";
+
+}
+}
+

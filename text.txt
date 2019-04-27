@@ -13,8 +13,10 @@ cat /proc/cpuinfo | grep Serial | cut -d ' ' -f 2
 //first a script to day count and update mysql local, then get_fld_daysRunning.sh to push it up to the cloud
 
 get_fld_daysRunning.sh{
-sudo mysql -e"select 1;";
+sudo mysql -e"use dtb_piBillings; select fld_daysRunning from tbl_piBillings;";
 }
+
+
 var_fld_piSerialKey=$(get_fld_piSerialKey.sh)
 var_fld_daysRunning=$(get_fld_daysRunning.sh)
 var_fld_daysPayedFor=$(get_fld_daysPayedFor.sh)

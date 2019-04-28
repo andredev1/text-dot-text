@@ -5,31 +5,41 @@ pushBillings.sh{
 
 
 
-:)
-get_fld_piSerialKey.sh{
-cat /proc/cpuinfo | grep Serial | cut -d ' ' -f 2
-}
+    :)
+    get_fld_piSerialKey.sh{
+    cat /proc/cpuinfo | grep Serial | cut -d ' ' -f 2
+    }
 
-//first a script to day count and update mysql local, then get_fld_daysRunning.sh to push it up to the cloud
+    //first a script to day count and update mysql local, then get_fld_daysRunning.sh to push it up to the cloud
 
-get_fld_daysRunning.sh{
-sudo mysql -e"use dtb_piBillings; select fld_daysRunning from tbl_piBillings;";
-}
+    get_fld_daysRunning.sh{
+    sudo mysql -e"use dtb_piBillings; select fld_daysRunning from tbl_piBillings;";
+    }
+
+    get_fld_daysPayedFor.sh{
+    sudo mysql -e"use dtb_piBillings; select fld_daysPayedFor from tbl_piBillings;";
+    }   
+
+    get_fld_powerSwitch.sh{
+    sudo mysql -e"use dtb_piBillings; select fld_powerSwitch from tbl_piBillings;";
+    }
 
 
-var_fld_piSerialKey=$(get_fld_piSerialKey.sh)
-var_fld_daysRunning=$(get_fld_daysRunning.sh)
-var_fld_daysPayedFor=$(get_fld_daysPayedFor.sh)
-var_fld_powerSwitch=$(get_fld_powerSwitch.sh)
+    var_fld_piSerialKey=$(get_fld_piSerialKey.sh)
+    var_fld_daysRunning=$(get_fld_daysRunning.sh)
+    var_fld_daysPayedFor=$(get_fld_daysPayedFor.sh)
+    var_fld_powerSwitch=$(get_fld_powerSwitch.sh)
 
-mysql -upi -praspberry -h 52.87.6.201 -e"use dtb_piBillings; insert into tbl_piBillings(fld_piSerialKey,fld_daysRunning,fld_powerSwitch,fld_daysPayedFor) values ('"+$var_fld_piSerialKey+"',"+var_fld_daysRunning+","+$var_fld_daysPayedFor+","+$var_fld_powerSwitch+");select 1;";
+    mysql -upi -praspberry -h 52.87.6.201 -e"use dtb_piBillings; insert into tbl_piBillings(fld_piSerialKey,fld_daysRunning,fld_powerSwitch,fld_daysPayedFor) values ('"+$var_fld_piSerialKey+"',"+var_fld_daysRunning+","+$var_fld_daysPayedFor+","+$var_fld_powerSwitch+");select 1;";
 
 }
 
 
 pi3 sends movies watched
 update to the cloud server mysql server
-pushMoviesWatched.sh
+pushMoviesWatched.sh{
+
+}
 
 
 

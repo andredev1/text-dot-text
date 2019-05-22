@@ -5,7 +5,6 @@ pushBillings.sh{
 
 
 
-    :)
     get_fld_piSerialKey.sh{
     cat /proc/cpuinfo | grep Serial | cut -d ' ' -f 2
     }
@@ -197,3 +196,28 @@ else { ?>
 
 </body></html>
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+$ echo 'YYYYYY
+XXXXXX
+XXXXXX
+YYYYYY
+XXXXXX
+XXXXXX' | awk '!(NR%3==1)'
+XXXXXX
+XXXXXX
+XXXXXX
+XXXXXX
